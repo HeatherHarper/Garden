@@ -62,4 +62,47 @@ public class Flower
     private void setBottom() {
         this.bottom = flowerY + flowerHeight; 
     }
+    
+    /**
+     * Draws the flower
+     */
+    public void draw() {
+        // draw stem
+        UI.setColor(Color.green);
+        UI.setLineWidth(2);
+        UI.drawLine(this.flowerX, this.flowerY, this.flowerX, this.bottom);
+        
+        //draw flower
+        UI.setColor(this.color);
+        UI.fillOval(this.left, this.top, this.flowerSize, this.flowerSize);
+        
+        // wait half a second so we can watch program
+        UI.sleep(500);
+    }
+    
+    /**
+     * Erase a rectangle around the current object
+     */
+    public void erase() {
+        UI.eraseRect(this.left, this.top, this.flowerSize + 1, this.bottom + 1);
+    }
+    
+    /**
+     * Make flower grow
+     */
+    public void grow() {
+        // erase flower
+        this.erase();
+        
+        // change fields to make flower taller
+        this.flowerY -= 10;
+        this.flowerSize += 10;
+        
+        // set new top and left
+        this.setTop();
+        this.setLeft();
+        
+        // draw flower
+        this.draw();
+    }
 }
